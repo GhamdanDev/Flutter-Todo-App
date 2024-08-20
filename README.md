@@ -1,7 +1,7 @@
 # todo
 
 A new Flutter project.
-
+sdk: '>=2.19.5 <3.0.0'
 ## Getting Started
 
 This project is a starting point for a Flutter application.
