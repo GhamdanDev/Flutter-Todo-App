@@ -19,10 +19,10 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Install Flutter (3.7.12)
+      - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.12'  # يتضمن Dart 2.19.6
+          flutter-version: '3.7.12'
           channel: 'stable'
           architecture: x64
 
@@ -54,3 +54,13 @@ jobs:
           ln -s ../Runner.app
           cd ..
           zip -r app.ipa Payload
+
+      - name: Upload to GitHub Releases
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/apk/release/*.apk,build/ios/iphoneos/app.ipa"
+          tag: v1.0.${{ github.run_number }}
+          token: ${{ secrets.TOKEN }}
+          draft: false
+          prerelease: false
+          body: "Automatic build for commit ${{ github.sha }}"
